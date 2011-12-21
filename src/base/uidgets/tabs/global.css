@@ -1,0 +1,5 @@
+.silk-tab { text-align:right;cursor:pointer;margin:5px 0px 0px 20px;padding:3px 5px 3px 5px; }
+.silk-tab.active {cursor:default;background-color:#ffffff}
+
+.silk-tabpanel{display:none}
+.silk-tabpanel.active {display:block}

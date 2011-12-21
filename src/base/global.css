@@ -1,0 +1,31 @@
+
+.jq-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: bottom;
+}
+.jq-icon-flickblue { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/flick/images/ui-icons_0073ea_256x240.png); }
+.jq-icon-white { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/flick/images/ui-icons_ffffff_256x240.png); }
+.jq-icon-lightblue { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/dot-luv/images/ui-icons_98d2fb_256x240.png); }
+.jq-icon-lighterblue { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/images/ui-icons_d8e7f3_256x240.png); }
+.jq-icon-blue { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/images/ui-icons_2e83ff_256x240.png); }
+.jq-icon-darkblue { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/dot-luv/images/ui-icons_00498f_256x240.png); }
+.jq-icon-teal { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/blitzer/images/ui-icons_004276_256x240.png); }
+.jq-icon-black { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/trontastic/images/ui-icons_000000_256x240.png); }
+.jq-icon-grey { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/vader/images/ui-icons_666666_256x240.png); }
+.jq-icon-lightgrey { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/vader/images/ui-icons_bbbbbb_256x240.png); }
+.jq-icon-lightergrey { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/dark-hive/images/ui-icons_cccccc_256x240.png); }
+.jq-icon-red { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/images/ui-icons_cd0a0a_256x240.png); }
+.jq-icon-pink { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/flick/images/ui-icons_ff0084_256x240.png); }
+.jq-icon-brown { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/dark-hive/images/ui-icons_a83300_256x240.png); }
+.jq-icon-lightbrown { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/eggplant/images/ui-icons_ebccce_256x240.png); }
+.jq-icon-purple { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/eggplant/images/ui-icons_734d99_256x240.png); }
+.jq-icon-orange { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/humanity/images/ui-icons_f08000_256x240.png); }
+.jq-icon-yellow { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/black-tie/images/ui-icons_ffcf29_256x240.png); }
+.jq-icon-lightyellow { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/sunny/images/ui-icons_ffe180_256x240.png); }
+.jq-icon-green { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/black-tie/images/ui-icons_4ca300_256x240.png); }
+.jq-icon-lightgreen { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/mint-choc/images/ui-icons_9bcc60_256x240.png); }
+.jq-icon-white { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/mint-choc/images/ui-icons_ffffff_256x240.png); }
+.ppi-star { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/images/ui-icons_d8e7f3_256x240.png); }
+.ppi-unstar { background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/images/ui-icons_2e83ff_256x240.png); }

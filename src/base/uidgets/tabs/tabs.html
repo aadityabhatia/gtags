@@ -1,0 +1,13 @@
+  script#tabs-widget-template(type='text/template').
+    <div>
+        <dl class="tabs silk-tabs">
+            <% for (var i=0; i<tabs.length; i++) { %>
+            <dd><a href="#" class="silk-tab <%= tabid %> <%= tabs[i].klass %>" data-x='<%= tabs[i].xid %>'><%= tabs[i].label %></a></dd>
+            <% } %>
+        </dl>
+        <ul class="tabs-content silk-tabs-content">
+            <% for (var i=0; i<tabs.length; i++) { %>
+            <li class="silk-tabpanel tabpanel <%= tabid %> <%= tabs[i].klass %>" data-x='<%= tabs[i].xid %>'></li>
+            <% } %>
+        </ul>
+    </div>

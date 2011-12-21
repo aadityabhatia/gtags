@@ -1,0 +1,16 @@
+{
+	"name": "gtags",
+	"description": "Google+ Tags",
+	"author": "Aaditya Bhatia <aadityabhatia@gmail.com>",
+	"version": "0.0.1",
+	"dependencies": {
+		"underscore": ">= 1.2.3",
+		"coffee-script": ">= 1.2.0",
+		"request": ">= 2.2.9",
+		"express": ">= 2.5.2",
+		"everyauth": ">= 0.2.27",
+		"jade": ">= 0.19.0",
+		"mongoskin": ">= 0.2.2"
+	},
+	"engine": ">= 0.6.6"
+}
