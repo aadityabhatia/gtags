@@ -1,3 +1,5 @@
-html
-    h1 Cannot find request.url
-    p Sorry we failed to locate this page or resource.
+extends layout
+
+block content
+	h1 Cannot find #{req.url}
+	p The requested page or resource does not exist.

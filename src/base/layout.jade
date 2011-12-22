@@ -1,6 +1,10 @@
+!!!5
 html
-  head
-    title= typeof(title) !== 'undefined' ? title : "G+ Tags"
-  body
-    #container
-      != body
+	head
+		block title
+			title G+ Tags
+		|<link rel="stylesheet" href="/stylesheets/foundation.css">
+		|<link rel="stylesheet" href="/stylesheets/app.css">
+	body
+		block content
+			p 

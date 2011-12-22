@@ -3,7 +3,7 @@ Dir.glob('src/**/*.rake').each { |r| import r }
 outputDir = "out"
 
 topJsTasks = []
-topJsFiles = ["src/app.js", "src/db.js"]
+topJsFiles = FileList["src/*.js"]
 topJsFiles.each do |f|
     outputFile = outputDir + "/" + File.basename(f)
     topJsTasks.push(outputFile)

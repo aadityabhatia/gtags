@@ -1,0 +1,15 @@
+var mongo = require('mongoskin');
+
+module.exports = {
+		session: {
+			secret: 'REPLACE ME'
+		},
+		db: {
+			host: 'localhost',
+			name: 'gtags'
+		},
+		google: {
+			clientId: 'REPLACE ME',
+			clientSecret: 'REPLACE ME'
+		}
+}
