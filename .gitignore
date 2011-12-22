@@ -1,6 +1,9 @@
-*.pyc
+/src/conf.js
+node_modules
+/out
+
+# eclipse metadata:
+.externalToolBuilders/*
 .project
 .pydevproject
 .settings
-node_modules
-out
