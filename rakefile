@@ -146,4 +146,4 @@ task :coffee => coffeeTasks
 task :jade => jadeTasks
 task :js => [jsOutputFile]
 
-task :do => [:routes, :topJs, :css, :coffee, :jade, :js]
+task :do => [:routes, :topJs, :css, :coffee, :jade, :js, "images:do", "client:do"]
