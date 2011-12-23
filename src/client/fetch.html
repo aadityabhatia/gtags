@@ -39,22 +39,22 @@
         <script type='text/template' id='post-list-tpl'>
             <% if (result.items.length > 0) { %>
                 <div>
-                <img src='<%= result.items[0].actor.image.url %>'>
-                <a href='<%= result.items[0].actor.url %>'><%= result.items[0].actor.displayName %></a>
-            </div>
-            <br>
-            <div class='row'>
-                <div class='six columns'>
-            <% for (var i=0; i<result.items.length; i++) { %>
-                <div class='apost' data-x='<%=result.items[i].id %>'>
-                    <span class='like-a curate jq-icon jq-icon-blue ui-icon-document'></span> <a target='_blank' href='<%= result.items[i].url %>'><%= result.items[i].title.substring(0, 50) %></a>
+                    <img src='<%= result.items[0].actor.image.url %>'>
+                    <a href='<%= result.items[0].actor.url %>'><%= result.items[0].actor.displayName %></a>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='six columns'>
+                        <% for (var i=0; i<result.items.length; i++) { %>
+                            <div class='apost' data-x='<%=result.items[i].id %>'>
+                                <span class='like-a curate jq-icon jq-icon-blue ui-icon-document'></span> <a target='_blank' href='<%= result.items[i].url %>'><%= result.items[i].title.substring(0, 50) %></a>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class='six columns curate_spot'>
+                    </div>
                 </div>
             <% } %>
-            <% } %>
-                </div>
-                <div class='six columns curate_spot'>
-                </div>
-            </div>
         </script>
         <script type='text/template' id='post-curate-tpl'>
             <div>
