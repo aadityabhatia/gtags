@@ -5,23 +5,23 @@ html
 			title G+ Tags
 
 		<!-- Included CSS Files -->
-		<link rel="stylesheet" href="/stylesheets/foundation.css">
-		<link rel="stylesheet" href="/stylesheets/app.css">
+		link(rel='stylesheet', href='/stylesheets/foundation.css')
+		link(rel='stylesheet', href='/stylesheets/global.css')
 		// [if lt IE 9]
-			<link rel="stylesheet" href="/stylesheets/ie.css">
+			link(rel='stylesheet', href='stylesheets/ie.css')
 
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css">
+		link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css')
 
 		<!-- IE Fix for HTML5 Tags -->
 		// [if lt IE 9]
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
 
 	body
-		.container(style='min-height: 500px')
+		.container(style='min-height: 500px; margin: 10px')
 			block header
 				.row.mzero
 					.four.columns
-						h2(style='margin:5px 0px')
+						h2
 							a(href="/", style='color:#000000') G+ Tags
 					.eight.columns.align.right
 						div(style='margin-top:5px;text-align:right')

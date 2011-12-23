@@ -5,7 +5,7 @@ var Gtags = {
 	    text = text.replace(/\s/gi, "-");
 	    return text;
     },
-    user: {access_token: "ya29.AHES6ZSASwtkE0vsMmSxQC4c2wb9jQGaxHZJvGo3T1Wc8_Q"},
+    user: {access_token: window.accessToken},
 
     fetch: {}
 }
