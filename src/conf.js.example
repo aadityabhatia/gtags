@@ -1,12 +1,17 @@
 var mongo = require('mongoskin');
 
 module.exports = {
+		debug: true,
 		session: {
 			secret: 'REPLACE ME'
 		},
 		db: {
 			host: 'localhost',
 			name: 'gtags'
+		},
+		http: {
+			listenIp: '127.0.0.1',
+			port: 1337
 		},
 		google: {
 			clientId: 'REPLACE ME',

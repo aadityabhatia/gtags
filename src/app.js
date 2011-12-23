@@ -20,7 +20,7 @@ everyauth.google
 		session.user.id = userMetadata.email
 		userMetadata['accessToken'] = accessToken;
 		userMetadata['accessTokenExtra'] = accessTokenExtra;
-		console.log(userMetadata);
+		// console.log(userMetadata);
 		var user = new User()
 		user.findOrCreate(userMetadata)
 		return user
@@ -76,5 +76,5 @@ everyauth.helpExpress(app);
 
 require ('./routes.js')(app);
 
-app.listen(1337, "127.0.0.1");
-console.log('Server running at http://127.0.0.1:1337/');
+app.listen(conf.http.port, conf.http.listenIp);
+console.log('Server running at http://127.0.0.1:%d/', conf.http.port);

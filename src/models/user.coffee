@@ -6,7 +6,7 @@ class User
         @name = ''
 
     findOrCreate: (data) ->
-        console.log('User: findOrCreate '+JSON.stringify(data))
+        # console.log('User: findOrCreate '+JSON.stringify(data))
         @id = data.id
         db.user.findOne({uid: @id}, (err, ru) ->
             if err

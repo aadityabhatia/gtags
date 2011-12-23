@@ -1,69 +1,115 @@
 Dir.glob('src/**/*.rake').each { |r| import r }
 
-outputDir = "out"
+directory outputDir = "out"
+directory cssOutputDir = outputDir + "/public/stylesheets"
+directory jsOutputDir = outputDir + "/public/js"
+directory htmlOutputDir = outputDir + "/public/html"
+directory imageOutputDir = outputDir + "/public/images"
+
+# src/*.js => out/*.js
 
 topJsTasks = []
 topJsFiles = FileList["src/*.js"]
 topJsFiles.each do |f|
     outputFile = outputDir + "/" + File.basename(f)
     topJsTasks.push(outputFile)
-    file outputFile => [f] do
-        mkdir_p outputDir
+    file outputFile => [f, outputDir] do
         sh "cp #{f} #{outputFile}"
     end
 end
+
+# src/*.r.coffee => out/routes.js
 
 routesFiles = FileList['src/**/*.r.coffee']
 routesHead = "src/routesHead.coffee"
 routesFoot = "src/routesFoot.coffee"
 routesOutput = outputDir + "/routes.js"
-file routesOutput => [routesHead, routesFoot] + routesFiles do
+file routesOutput => [outputDir, routesHead, routesFoot] + routesFiles do
     flist = routesHead + " " + routesFiles.join(" ") + " " + routesFoot
     sh "coffee -o #{outputDir} --join routes.js --compile #{flist}"
 end
 
-cssOutputDir = outputDir + "/public/stylesheets"
+# src/**/global.css => out/public/stylesheets/global.css
 
 globalCssOutput = cssOutputDir + "/global.css"
 globalCssSrc = FileList['src/**/global.css']
 globalCssHead = "src/globalHead.css"
-file globalCssOutput => [globalCssHead] + globalCssSrc do
+file globalCssOutput => [globalCssHead] + globalCssSrc + [cssOutputDir] do
     cssFileList = globalCssHead + " " + globalCssSrc.join(" ")
-    mkdir_p cssOutputDir
     sh "cat #{cssFileList} > #{globalCssOutput}"
 end
 
-cssCopyTasks = []
+# src/base/*.css => out/public/stylesheets/*.css
+
+baseCssCopyTasks = []
 cssCopySrc = FileList['src/base/*.css'].exclude("src/**/global.css")
 cssCopySrc.each do |f|
     destFile = cssOutputDir + "/" + File.basename(f)
-    file destFile => [f] do
+    file destFile => [f, cssOutputDir] do
         FileUtils.cp f, destFile
     end
-    cssCopyTasks.push(destFile)
+baseCssCopyTasks.push(destFile)
 end
-    
-coffeeTasks = []
 
+# src/base/*.js => out/public/js/*.js
+
+baseJsCopyTasks = []
+jsCopySrc = FileList['src/base/*.js']
+jsCopySrc.each do |f|
+    destFile = jsOutputDir + "/" + File.basename(f)
+    file destFile => [f, jsOutputDir] do
+        FileUtils.cp f, destFile
+    end
+    baseJsCopyTasks.push(destFile)
+end
+
+# src/base/*.html => out/public/html/*.html
+
+baseHtmlCopyTasks = []
+htmlCopySrc = FileList['src/base/*.html']
+htmlCopySrc.each do |f|
+    destFile = htmlOutputDir + "/" + File.basename(f)
+    file destFile => [f, htmlOutputDir] do
+        FileUtils.cp f, destFile
+    end
+    baseHtmlCopyTasks.push(destFile)
+end
+
+# src/base/images/**/*.(png|jpg|gif) => out/public/images/**/*
+
+baseImageCopyTasks = []
+imageCopySrc = FileList['src/base/images/**/*.png', 'src/base/images/**/*.jpg', 'src/base/images/**/*.gif']
+imageCopySrc.each do |f|
+    destFile = imageOutputDir + "/" + f.sub("src/base/images/", "")
+    directory destDir = File.dirname(destFile)
+    file destFile => [f, destDir] do
+        FileUtils.cp f, destDir
+    end
+    baseImageCopyTasks.push(destFile)
+end
+
+# src/models/**/*.coffee => out/models/**/*.js
+
+coffeeTasks = []
 modelsOutputDir = outputDir + "/models"
 coffeeModelsSrc = FileList["src/models/**/*.coffee"]
 coffeeModelsSrc.each do |f|
     destFile = modelsOutputDir + "/" + f.sub("src/models/", "").sub("\.coffee", ".js")
-    file destFile => [f] do
-        destDir = File.dirname(destFile)
-        mkdir_p destDir
+    directory destDir = File.dirname(destFile)
+    file destFile => [f, destDir] do
         sh "coffee -c -o #{destDir} #{f}"
     end
     coffeeTasks.push(destFile)
 end
 
+# src/modules/**/*.coffee => out/controllers/**/*.js
+
 controllersOutputDir = outputDir + "/controllers"
 coffeeModulesSrc = FileList["src/modules/**/*.coffee"].exclude("src/**/*.r.coffee")
 coffeeModulesSrc.each do |f|
     destFile = controllersOutputDir + "/" + f.sub("src/modules/", "").sub("\.coffee", ".js")
-    file destFile => [f] do
-        destDir = File.dirname(destFile)
-        mkdir_p destDir
+    directory destDir = File.dirname(destFile)
+    file destFile => [f, destDir] do
         sh "coffee -c -o #{destDir} #{f}"
     end
     coffeeTasks.push(destFile)
@@ -86,29 +132,35 @@ def sniffHeaderDependencies inputFile
     return headerDependencyFiles
 end
 
+# src/base/**/*.jade => out/views/**/*.jade
+
 jadeTasks = []
 jadeOutputDir = outputDir + "/views"
 jadeBaseSrc = FileList["src/base/**/*.jade"]
 jadeBaseSrc.each do |f|
     destFile = jadeOutputDir + "/" + f.sub("src/base/", "")
+    directory destDir = File.dirname(destFile)
     headerDependencyFiles = sniffHeaderDependencies(f)
-    file "#{destFile}" => headerDependencyFiles + [f] do
-        mkdir_p File.dirname(destFile)
+    file "#{destFile}" => headerDependencyFiles + [f, destDir] do
         sh "cat #{f} |filepp -I. -m bigdef.pm -b -c > #{destFile}"
     end
     jadeTasks.push(destFile)
 end
 
+# src/modules/**/*.jade => out/views/**/*.jade
+
 jadeModulesSrc = FileList["src/modules/**/*.jade"]
 jadeModulesSrc.each do |f|
     destFile = jadeOutputDir + "/" + f.sub("src/modules/", "")
     headerDependencyFiles = sniffHeaderDependencies(f)
-    file destFile => headerDependencyFiles + [f] do
-        mkdir_p File.dirname(destFile)
+    directory destDir = File.dirname(destFile)
+    file destFile => headerDependencyFiles + [f, destDir] do
         sh "cat #{f} |filepp -I. -m bigdef.pm -b -c >#{destFile}"
     end
     jadeTasks.push(destFile)
 end
+
+# src/base/js/$f.js => out/public/js/base.js
 
 jsBaseScripts = [
     "src/base/js/underscore-min.js",
@@ -119,12 +171,9 @@ jsBaseScripts = [
     "src/base/js/jquery.placeholder.js",
     "src/base/uidgets/tabs/tabs.js"
 ]
-jsOutputDir = outputDir + "/public/js"
-
 jsOutputFile = jsOutputDir + "/base.js"
-file "#{jsOutputFile}" => jsBaseScripts do
+file "#{jsOutputFile}" => jsBaseScripts + [jsOutputDir] do
     fileList = jsBaseScripts.join(" ")
-    mkdir_p jsOutputDir
     sh "cat #{fileList} > #{jsOutputFile}"
 end
 
@@ -132,18 +181,22 @@ task :clean do
     FileUtils.rm_rf(outputDir)
 end
 
-task :copyNodeModules => FileList["node_modules/**"] do
+# node_modules => out/node_modules
+
+task :copyNodeModules => FileList["node_modules/**/*"] + [outputDir] do
     # FileUtils.rm_rf(outputDir + "/node_modules")
     # TODO: if directory exists, don't overwrite
-    mkdir_p outputDir
     FileUtils.cp_r "node_modules", outputDir
 end
 
 task :topJs => topJsTasks
 task :routes => [routesOutput]
-task :css => [globalCssOutput] + cssCopyTasks
+task :css => [globalCssOutput] + baseCssCopyTasks
 task :coffee => coffeeTasks
 task :jade => jadeTasks
-task :js => [jsOutputFile]
+task :js => [jsOutputFile] + baseJsCopyTasks
+task :html => baseHtmlCopyTasks
+task :images => baseImageCopyTasks
 
 task :do => [:routes, :topJs, :css, :coffee, :jade, :js, "images:do", "client:do"]
+task :default => :do
