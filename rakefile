@@ -198,5 +198,5 @@ task :js => [jsOutputFile] + baseJsCopyTasks
 task :html => baseHtmlCopyTasks
 task :images => baseImageCopyTasks
 
-task :do => [:routes, :topJs, :css, :coffee, :jade, :js, "images:do", "client:do"]
+task :do => [:routes, :topJs, :css, :coffee, :jade, :js, :html, :images]
 task :default => :do
