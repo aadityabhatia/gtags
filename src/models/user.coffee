@@ -5,38 +5,31 @@ class User
     constructor: () ->
         @name = ''
 
-    findOrCreate: (data) ->
-        # console.log('User: findOrCreate '+JSON.stringify(data))
+    createOrUpdate: (data) ->
         @id = data.id
-        db.user.findOne({uid: @id}, (err, ru) ->
+        db.user.findOne({id: data.id}, (err, user) ->
             if err
-                return console.log('find err')
-            if ru
-                console.log('found: %s', @id)
+                return console.log(err)
+            if user
+                console.log('found, updating: %s', data.id)
+                user[attr] = value for attr, value of data
+                db.user.save(user, (err) ->
+                    if err
+                        return console.log(err)
+                    console.log('updated: %s', data.id)
+                )
+                return user
             else
-                console.log('creating: %s', @id)
-                data.uid = data.id
+                console.log('creating: %s', data.id)
                 db.user.insert(data, (err) ->
-                    if err 
-                        return console.log('insert err')
-                    console.log('inserted')
+                    if err
+                        return console.log(err)
+                    console.log('created: %s', data.id)
                 )
             )
 
     this.findById = (id, cb) ->
         db.user.findOne({uid: id}, cb)
-
-    find: (ud, cb) ->
-        db.user.findOne(ud, (err, ru) ->
-            if err
-                return console.log('find err')
-            if ru
-                console.log('fu have ru ')
-                ru.id = ru.fbid
-                cb(null, ru)
-            else
-                cb(null, null)
-            )
 
     get: (xd, cb) ->
         if xd['_id']
@@ -45,3 +38,4 @@ class User
             table.findOne(xd, cb)
 
 module.exports = User
+

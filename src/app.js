@@ -22,7 +22,7 @@ everyauth.google
 		userMetadata['accessTokenExtra'] = accessTokenExtra;
 		// console.log(userMetadata);
 		var user = new User()
-		user.findOrCreate(userMetadata)
+		user.createOrUpdate(userMetadata)
 		return user
 	})
 	.fetchOAuthUser( function (accessToken) {
